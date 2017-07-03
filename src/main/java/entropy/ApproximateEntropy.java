@@ -45,7 +45,13 @@ public class ApproximateEntropy {
                             int m = p.getM();
                             int n = p.getN();
 
-                            int start = i - n;
+                            /**
+                             * We start at i-n+1 to use the data
+                             * at ts[end], i.e. to use the data from
+                             * the last available data-point.
+                             */
+
+                            int start = i - n + 1;
                             int end = i;
                             double r = TimeSeries.sd(ts, start, end) * p.getSdPercentage();
 
@@ -80,7 +86,13 @@ public class ApproximateEntropy {
 
         double ans = 0;
 
-        for (int i = start; i < end - m + 1; i++) {
+        /**
+         * The limit is set to end - m + 1, because the last distance
+         * is going to be done with i=end, therefore a vector
+         * with (ts[end],ts[end+1],...,ts[end+m-1]) will be built.
+         */
+
+        for (int i = start; i <= end - m + 1; i++) {
             ans += Math.log(c(ts, start, end, m, r, n, i));
         }
 
@@ -99,7 +111,7 @@ public class ApproximateEntropy {
             int index) {
 
         double ans = 0;
-        for (int i = start; i < end - m + 1; i++) {
+        for (int i = start; i <= end - m + 1; i++) {
             /**
              * Important! The ApEn algorithm counts each sequence as matching itself,
              * a practice carried over to avoid the occurrence of ln (0) in the calculations.

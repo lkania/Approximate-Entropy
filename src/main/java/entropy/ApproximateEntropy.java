@@ -19,11 +19,11 @@ import java.util.stream.IntStream;
 
 public class ApproximateEntropy {
 
-    public static List<Double[]> apEn(
+    public static List<ArrayList<Double>> apEn(
             final double[] ts,
             final Parameters[] pList) {
 
-        ArrayList<Double[]> ans = Arrays.stream(pList)
+        ArrayList<ArrayList<Double>> ans = Arrays.stream(pList)
                 .parallel()
                 .map(p -> apEn(ts, p))
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -32,7 +32,7 @@ public class ApproximateEntropy {
     }
 
 
-    public static Double[] apEn(
+    public static ArrayList<Double> apEn(
             final double[] ts,
             final Parameters p) {
 
@@ -59,7 +59,7 @@ public class ApproximateEntropy {
                         }
                 ).collect(Collectors.toCollection(ArrayList::new));
 
-        return (Double[]) ans.toArray();
+        return ans;
 
 
     }

@@ -3,6 +3,7 @@ package utils.exporters.csv;
 import entropy.parameters.Parameters;
 import utils.exporters.FileExporter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CSVExporter {
@@ -12,7 +13,7 @@ public class CSVExporter {
     private static final String CSV = ".csv";
 
     public static void export(
-            List<Double[]> apEns,
+            List<ArrayList<Double>> apEns,
             Parameters[] pList,
             String path,
             String name) {
@@ -22,14 +23,23 @@ public class CSVExporter {
     }
 
     public static String getCSV(
-            List<Double[]> apEns,
+            List<ArrayList<Double>> apEns,
             Parameters[] pList) {
 
         StringBuilder sb = new StringBuilder();
 
         addList(sb, pList);
 
-        apEns.forEach(apEn -> addList(sb, apEn));
+        for (int i = 0; i < apEns.get(0).size(); i++) {
+
+            Double[] vals = new Double[apEns.size()];
+            int j = 0;
+            for (ArrayList<Double> apEn : apEns) {
+                vals[j++] = apEn.get(i);
+
+            }
+            addList(sb, vals);
+        }
 
         return sb.toString();
 

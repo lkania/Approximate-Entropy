@@ -1,10 +1,14 @@
+import entropy.ApproximateEntropy;
 import entropy.parameters.Parameters;
+import utils.exporters.csv.CSVExporter;
 import utils.importers.csv.QuantQuoteCSVReader;
 import utils.time.Time;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class EntropySelection {
+public class ClosePriceApEnComputation {
 
 
     public static final String CWD = System.getProperty("user.dir");
@@ -13,9 +17,7 @@ public class EntropySelection {
     /**
      * It has to be changed to the desired directory
      */
-    public static final String SRC = CWD + "/../data/";
-
-    private static final String[] sources = {"avgLowClose", "close", "closeReturn"};
+    public static final String SRC = CWD + "/../data/closeReturn/";
 
     public static final String[] stocks = {"dia", "qqqq", "spy"};
 
@@ -31,19 +33,18 @@ public class EntropySelection {
         pList[0] = new Parameters(3, 1000, 0.1);
 
 
-        Arrays.stream(sources).parallel()
+        Arrays.stream(stocks).parallel()
                 .forEach(
-                        src -> Arrays.stream(stocks).parallel()
-                                .forEach(
-                                        stock -> {
+                        stock -> {
 
-                                            String srcFile = SRC + src + "/" + stock + ".csv";
-                                            String outPath = OUT + src + "/";
+                            String srcFile = SRC + stock + ".csv";
 
-                                            run(stock, srcFile, outPath, pList);
+                            Time.log(
+                                    () -> run(stock, srcFile, OUT, pList),
+                                    stock
+                            );
 
-                                        }
-                                )
+                        }
                 );
 
     }
@@ -57,9 +58,9 @@ public class EntropySelection {
 
         double[] price = QuantQuoteCSVReader.read(srcFile);
 
-        //List<Double[]> apEns = ApproximateEntropy.apEn(price, pList);
+        List<ArrayList<Double>> apEns = ApproximateEntropy.apEn(price, pList);
 
-        //CSVExporter.export(apEns, pList, outPath, stock);
+        CSVExporter.export(apEns, pList, outPath, stock);
     }
 
 }

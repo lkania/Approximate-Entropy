@@ -12,7 +12,7 @@ public class FileExporter {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            throw new RuntimeException("File doesn't exists");
+            throw new RuntimeException("File doesn't exists: " + path);
         }
 
     }

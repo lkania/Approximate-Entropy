@@ -18,35 +18,15 @@ repositories {
     mavenCentral()
 }
 
-task stocks(type: Jar) {
+task close(type: Jar) {
     manifest {
-        attributes 'Main-Class': 'StocksTest'
+        attributes 'Main-Class': 'ClosePriceApEnComputation'
     }
-    baseName = 'stocks'
-    with jar
-}
-
-task means(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'MeansComputation'
-    }
-    baseName = 'means'
-    with jar
-}
-
-task entropy(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'EntropyComputation'
-    }
-    baseName = 'entropy'
+    baseName = 'close'
     with jar
 }
 
 dependencies {
     compile 'org.eclipse.collections:eclipse-collections-api:8.1.0'
     compile 'org.eclipse.collections:eclipse-collections:8.1.0'
-    compile group: 'net.openhft', name: 'chronicle-map', version: '3.13.0'
-    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.2'
-    compile "org.knowm.xchart:xchart:3.3.0"
-    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 }

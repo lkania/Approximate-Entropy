@@ -1,13 +1,10 @@
-import entropy.ApproximateEntropy;
 import entropy.parameters.Parameters;
 import entropy.parameters.ParametersFactory;
-import utils.exporters.csv.CSVExporter;
 import utils.importers.csv.QuantQuoteCSVReader;
 import utils.time.Time;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class EntropyComputation {
 
@@ -49,9 +46,9 @@ public class EntropyComputation {
 
                             double[] price = QuantQuoteCSVReader.read(srcFile);
 
-                            List<Double[]> apEns = ApproximateEntropy.apEn(price, pList);
+                            //   List<Double[]> apEns = ApproximateEntropy.apEn(price, pList);
 
-                            CSVExporter.export(apEns, pList, OUT, stock);
+                            // CSVExporter.export(apEns, pList, OUT, stock);
                         }
                 );
     }

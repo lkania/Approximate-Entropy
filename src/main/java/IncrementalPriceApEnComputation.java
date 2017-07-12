@@ -7,23 +7,23 @@ import utils.time.Time;
 import java.util.Arrays;
 import java.util.List;
 
-public class ClosePriceReturnApEnComputation {
+public class IncrementalPriceApEnComputation {
 
 
     public static final String CWD = System.getProperty("user.dir");
-    public static final String OUT = CWD + "/../data/apEn/test/";
+    public static final String OUT = CWD + "/../data/apEn/incremental/";
 
     /**
      * It has to be changed to the desired directory
      */
-    public static final String SRC = CWD + "/../data/closeReturn/";
+    public static final String SRC = CWD + "/../data/incremental/";
 
     public static final String[] stocks = {"spy", "qqqq", "dia"};
 
 
     public static void main(String[] args) {
 
-        Time.log(() -> run(), "ClosePriceReturnApEnComputation");
+        Time.log(() -> run(), "IncrementalPriceApEnComputation");
 
     }
 

@@ -6,7 +6,7 @@ public class TimeSeries {
         double ans = 0;
         double mean = mean(ts, start, end);
         for (int i = start; i < end; i++) {
-            ans += Math.pow(ts[i] - mean, 2);
+            ans += (ts[i] - mean) * (ts[i] - mean);
         }
         ans /= end - start + 1;
         ans = Math.sqrt(ans);

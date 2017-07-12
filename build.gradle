@@ -18,11 +18,27 @@ repositories {
     mavenCentral()
 }
 
+task closeReturn(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'ClosePriceReturnApEnComputation'
+    }
+    baseName = 'closeReturn'
+    with jar
+}
+
 task close(type: Jar) {
     manifest {
         attributes 'Main-Class': 'ClosePriceApEnComputation'
     }
     baseName = 'close'
+    with jar
+}
+
+task incremental(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'IncrementalApEnComputation'
+    }
+    baseName = 'incremental'
     with jar
 }
 

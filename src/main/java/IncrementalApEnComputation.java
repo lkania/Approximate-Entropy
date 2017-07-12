@@ -4,22 +4,22 @@ import utils.time.Time;
 
 import java.util.Arrays;
 
-public class ClosePriceApEnComputation {
+public class IncrementalApEnComputation {
 
 
     public static final String CWD = System.getProperty("user.dir");
-    public static final String OUT = CWD + "/../data/apEn/close/";
+    public static final String OUT = CWD + "/../data/apEn/incremental/";
 
     /**
      * It has to be changed to the desired directory
      */
-    public static final String SRC = CWD + "/../data/close/";
+    public static final String SRC = CWD + "/../data/incremental/";
 
-    public static final String[] stocks = {"dia", "qqqq", "spy"};
+    public static final String[] stocks = {"spy"};
 
     public static void main(String[] args) {
 
-        Time.log(() -> run(), "ClosePriceApEnComputation");
+        Time.log(() -> run(), "IncrementalApEnComputation");
 
     }
 

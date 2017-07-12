@@ -2,12 +2,12 @@ package entropy;
 
 import entropy.parameters.Parameters;
 import utils.statistics.TimeSeries;
+import utils.time.Time;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * This class implements the algorithm proposed by Pincus to calculate the Approximate Entropy (ApEn).
@@ -19,48 +19,48 @@ import java.util.stream.IntStream;
 
 public class ApproximateEntropy {
 
-    public static List<ArrayList<Double>> apEn(
+    public static List<double[]> apEn(
             final double[] ts,
             final Parameters[] pList) {
 
-        ArrayList<ArrayList<Double>> ans = Arrays.stream(pList)
+        ArrayList<double[]> ans = Arrays.stream(pList)
                 .parallel()
-                .map(p -> apEn(ts, p))
+                .map(p -> Time.log(() -> apEn(ts, p), ts.length + " " + p.toString()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return ans;
     }
 
 
-    public static ArrayList<Double> apEn(
+    public static double[] apEn(
             final double[] ts,
             final Parameters p) {
 
-        int limit = ts.length;
+        int startIndex = 500000;
+        int limit = 500100;//ts.length;
 
-        ArrayList<Double> ans = IntStream.range(1100, limit)
-                .parallel()
-                .mapToObj(
-                        i -> {
-                            int m = p.getM();
-                            int n = p.getN();
 
-                            /**
-                             * We start at i-n+1 to use the data
-                             * at ts[end], i.e. to use the data from
-                             * the last available data-point.
-                             */
+        double[] ans = new double[limit - startIndex];
 
-                            int start = i - n + 1;
-                            int end = i;
-                            double r = TimeSeries.sd(ts, start, end) * p.getSdPercentage();
+        for (int i = startIndex; i < limit; i++) {
+            int m = p.getM();
+            int n = p.getN();
 
-                            return apEn(ts, start, end, m, r, n);
-                        }
-                ).collect(Collectors.toCollection(ArrayList::new));
+            /**
+             * We start at i-n+1 to use the data
+             * at ts[end], i.e. to use the data from
+             * the last available data-point.
+             */
+
+            int start = i - n + 1;
+            int end = i;
+            double r = TimeSeries.sd(ts, start, end) * p.getSdPercentage();
+
+            ans[i - startIndex] = apEn(ts, start, end, m, r, n);
+
+        }
 
         return ans;
-
 
     }
 

@@ -18,11 +18,11 @@ repositories {
     mavenCentral()
 }
 
-task incremental(type: Jar) {
+task apen(type: Jar) {
     manifest {
-        attributes 'Main-Class': 'IncrementalPriceApEnComputation'
+        attributes 'Main-Class': 'ApEnComputation'
     }
-    baseName = 'incremental'
+    baseName = 'apen'
     with jar
 }
 

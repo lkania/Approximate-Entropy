@@ -36,7 +36,7 @@ public class ApproximateEntropy {
             final double[] ts,
             final Parameters p) {
 
-        int startIndex = 2000;
+        int startIndex = 1000;
         int limit = ts.length;
 
         double[] ans = new double[limit - startIndex];

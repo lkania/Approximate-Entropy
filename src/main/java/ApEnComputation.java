@@ -7,37 +7,43 @@ import utils.time.Time;
 import java.util.Arrays;
 import java.util.List;
 
-public class IncrementalPriceApEnComputation {
+public class ApEnComputation {
 
 
     public static final String CWD = System.getProperty("user.dir");
-    public static final String OUT = CWD + "/../data/apEn/incremental/";
+    public static final String SRC = CWD + "/../data/apEn_src/incremental/15min/shared_period/";
+    public static final String OUT = CWD + "/../data/apEn/incremental/15min/shared_period/";
 
-    /**
-     * It has to be changed to the desired directory
-     */
-    public static final String SRC = CWD + "/../data/incremental/";
 
     public static final String[] stocks = {"spy", "qqqq", "dia"};
 
 
     public static void main(String[] args) {
 
-        Time.log(() -> run(), "IncrementalPriceApEnComputation");
+        Time.log(() -> run(), "ApEnComputation");
 
     }
 
     private static void run() {
 
-        final Parameters[] pList = new Parameters[5];
-        pList[0] = new Parameters(3, 1000, 0.1);
-        pList[1] = new Parameters(3, 1100, 0.1);
-        pList[2] = new Parameters(3, 1200, 0.1);
-        pList[3] = new Parameters(3, 1300, 0.1);
-        pList[4] = new Parameters(3, 1400, 0.1);
+        int i = 0;
+        final Parameters[] pList = new Parameters[12];
+        pList[i++] = new Parameters(1, 1000, 0.1);
+        pList[i++] = new Parameters(1, 1000, 0.15);
+        pList[i++] = new Parameters(1, 1000, 0.2);
+        pList[i++] = new Parameters(1, 1000, 0.25);
 
+        pList[i++] = new Parameters(2, 1000, 0.1);
+        pList[i++] = new Parameters(2, 1000, 0.15);
+        pList[i++] = new Parameters(2, 1000, 0.2);
+        pList[i++] = new Parameters(2, 1000, 0.25);
 
-        Arrays.stream(stocks).parallel()
+        pList[i++] = new Parameters(3, 1000, 0.1);
+        pList[i++] = new Parameters(3, 1000, 0.15);
+        pList[i++] = new Parameters(3, 1000, 0.2);
+        pList[i++] = new Parameters(3, 1000, 0.25);
+
+        Arrays.stream(stocks)
                 .forEach(
                         stock -> {
 

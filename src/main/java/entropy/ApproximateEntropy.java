@@ -41,6 +41,10 @@ public class ApproximateEntropy {
 
         double[] ans = new double[limit - startIndex];
 
+        /**
+         * Known issue: The first element of the time-series is ignored.
+         */
+
         for (int i = startIndex; i < limit; i++) {
             int m = p.getM();
             int n = p.getN();

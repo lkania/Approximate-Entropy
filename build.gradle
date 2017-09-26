@@ -26,6 +26,14 @@ task apen(type: Jar) {
     with jar
 }
 
+task apencl(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'CommandLine'
+    }
+    baseName = 'apencl'
+    with jar
+}
+
 dependencies {
     compile 'org.eclipse.collections:eclipse-collections-api:8.1.0'
     compile 'org.eclipse.collections:eclipse-collections:8.1.0'

@@ -1,7 +1,7 @@
 import entropy.ApproximateEntropy;
 import entropy.parameters.Parameters;
 import utils.exporters.csv.CSVExporter;
-import utils.importers.csv.QuantQuoteCSVReader;
+import utils.importers.csv.OneColumnCSVReader;
 import utils.time.Time;
 
 import java.util.Arrays;
@@ -10,12 +10,10 @@ import java.util.List;
 public class ApEnComputation {
 
 
-    public static final String CWD = System.getProperty("user.dir");
-    public static final String SRC = CWD + "/../data/apEn_src/incremental/15min/shared_period/";
-    public static final String OUT = CWD + "/../data/apEn/incremental/15min/shared_period/";
-
-
-    public static final String[] stocks = {"spy", "qqqq", "dia"};
+    private static final String CWD = System.getProperty("user.dir");
+    private static final String SRC = CWD + "/../data/apEn_src/incremental/15min/shared_period/";
+    private static final String OUT = CWD + "/../data/apEn/incremental/15min/shared_period/";
+    private static final String[] stocks = {"spy", "qqqq", "dia"};
 
 
     public static void main(String[] args) {
@@ -66,7 +64,7 @@ public class ApEnComputation {
             final String outPath,
             final Parameters[] pList) {
 
-        double[] price = QuantQuoteCSVReader.read(srcFile);
+        double[] price = OneColumnCSVReader.read(srcFile);
 
         List<double[]> apEns = ApproximateEntropy.apEn(price, pList);
 

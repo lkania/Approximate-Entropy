@@ -34,6 +34,15 @@ task apencl(type: Jar) {
     with jar
 }
 
+task exp(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'TheoreticalExperiment'
+    }
+    baseName = 'exp'
+    with jar
+}
+
+
 dependencies {
     compile 'org.eclipse.collections:eclipse-collections-api:8.1.0'
     compile 'org.eclipse.collections:eclipse-collections:8.1.0'

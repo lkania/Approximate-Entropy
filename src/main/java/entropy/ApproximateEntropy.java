@@ -36,18 +36,13 @@ public class ApproximateEntropy {
             final double[] ts,
             final Parameters p) {
 
-        int startIndex = 1000;
+        int m = p.getM();
+        int n = p.getN();
         int limit = ts.length;
 
-        double[] ans = new double[limit - startIndex];
+        double[] ans = new double[limit - n + 1];
 
-        /**
-         * Known issue: The first element of the time-series is ignored.
-         */
-
-        for (int i = startIndex; i < limit; i++) {
-            int m = p.getM();
-            int n = p.getN();
+        for (int i = n - 1; i < limit; i++) {
 
             /**
              * We start at i-n+1 to use the data
@@ -59,7 +54,7 @@ public class ApproximateEntropy {
             int end = i;
             double r = TimeSeries.sd(ts, start, end) * p.getSdPercentage();
 
-            ans[i - startIndex] = apEn(ts, start, end, m, r, n);
+            ans[start] = apEn(ts, start, end, m, r, n);
 
         }
 

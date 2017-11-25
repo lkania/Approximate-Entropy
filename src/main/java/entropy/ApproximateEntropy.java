@@ -24,7 +24,7 @@ public class ApproximateEntropy {
             final Parameters[] pList) {
 
         ArrayList<double[]> ans = Arrays.stream(pList)
-                //.parallel()
+                .parallel()
                 .map(p -> Time.log(() -> apEn(ts, p), ts.length + " " + p.toString()))
                 .collect(Collectors.toCollection(ArrayList::new));
 

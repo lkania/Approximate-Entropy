@@ -4,19 +4,18 @@ import utils.CommandLineUtils;
 
 public class CommandLine {
 
-    private static Parameters p = new Parameters(2, 1000, 0.1);
-
     public static void main(String[] args) {
 
-        String s = args[0];
+        double[] ts = CommandLineUtils.StringToArray(args[0]);
+        int m = Integer.parseInt(args[1]);
+        int n = Integer.parseInt(args[2]);
+        double r = Double.parseDouble(args[3]);
 
-        double[] ts = CommandLineUtils.StringToArray(s);
+        Parameters p = new Parameters(m, n, r);
 
         double[] apen = ApproximateEntropy.apEn(ts, p);
 
-        String ans = CommandLineUtils.ArrayToString(apen);
-
-        System.out.print(ans);
+        System.out.print(CommandLineUtils.ArrayToString(apen));
     }
 
 }

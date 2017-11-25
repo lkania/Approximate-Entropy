@@ -14,13 +14,14 @@ public class TheoreticalExperiment {
     private static final String SRC = CWD + "/../data/theoretical_experiment/apen_src/";
     private static final String OUT = CWD + "/../data/theoretical_experiment/apen_out/";
 
-    private static final String[] EXPERIMENTS = {"sine+noise", "noise+sine", "sine+chaos", "chaos+sine"};
+    private static final String[] EXPERIMENTS = {
+            "sine+noise+3", "noise+sine+3", "sine+chaos+3", "chaos+sine+3"};
     private static final double[] NOISE_LEVELS = {0, 0.1, 0.2, 0.3, 0.4};
     private static final int ITERATIONS = 100;
 
     public static void main(String[] args) {
 
-        Time.log(() -> run(), "ApEnComputation");
+        Time.log(() -> run(), "TheoreticalExperiment");
 
     }
 
@@ -52,7 +53,7 @@ public class TheoreticalExperiment {
                             IntStream.range(0, ITERATIONS)
                                     .forEach(
                                             iteration -> Arrays.stream(NOISE_LEVELS)
-                                                    .parallel()
+                                                    //.parallel()
                                                     .forEach(
                                                             noiseLevel -> {
 
